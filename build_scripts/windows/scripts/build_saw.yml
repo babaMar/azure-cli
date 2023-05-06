@@ -48,7 +48,7 @@ jobs:
       
       build_scripts/windows/scripts/build_saw.cmd
     env:
-      BLOB_SAS: "$(BLOB_SAS)"
+      BLOB_SAS: $(BLOB_SAS)
     displayName: 'Build Windows SAW MSI'
 
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0

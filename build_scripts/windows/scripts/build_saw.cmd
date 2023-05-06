@@ -13,7 +13,7 @@ if "%CLI_VERSION%"=="" (
     echo Please set the CLI_VERSION environment variable, e.g. 2.0.13
     goto ERROR
 )
-if %BLOB_SAS%=="" (
+if "%BLOB_SAS%"=="" (
     echo Please set the BLOB_SAS environment variable
     goto ERROR
 )
@@ -64,9 +64,8 @@ REM download wheel
 if not exist %MISC_DIR% (
     mkdir %MISC_DIR%
     pushd %MISC_DIR%
-    echo curl --output %WINDOWS_HTTP_FILENAME% --fail %BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?"%BLOB_SAS%"
-    curl --output %WINDOWS_HTTP_FILENAME% --fail %BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?"%BLOB_SAS%"
-    curl --output %SPYTHON_FILENAME% --fail %BASE_MISC_URL%/%SPYTHON_FILENAME%?"%BLOB_SAS%"
+    curl --output %WINDOWS_HTTP_FILENAME% --fail "%BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?%BLOB_SAS%"
+    curl --output %SPYTHON_FILENAME% --fail "%BASE_MISC_URL%/%SPYTHON_FILENAME%?%BLOB_SAS%"
     popd
 )
 
