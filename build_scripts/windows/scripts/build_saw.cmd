@@ -64,8 +64,9 @@ REM download wheel
 if not exist %MISC_DIR% (
     mkdir %MISC_DIR%
     pushd %MISC_DIR%
-    curl --output %WINDOWS_HTTP_FILENAME% %BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?%BLOB_SAS%
-    curl --output %SPYTHON_FILENAME% %BASE_MISC_URL%/%SPYTHON_FILENAME%?%BLOB_SAS%
+    echo curl --output %WINDOWS_HTTP_FILENAME% --fail %BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?"%BLOB_SAS%"
+    curl --output %WINDOWS_HTTP_FILENAME% --fail %BASE_MISC_URL%/%WINDOWS_HTTP_FILENAME%?"%BLOB_SAS%"
+    curl --output %SPYTHON_FILENAME% --fail %BASE_MISC_URL%/%SPYTHON_FILENAME%?"%BLOB_SAS%"
     popd
 )
 
@@ -74,6 +75,7 @@ if exist %SPYTHON_DIR% rmdir /s /q %SPYTHON_DIR%
 if not exist %SPYTHON_DIR% (
     mkdir %SPYTHON_DIR%
     cd %SPYTHON_DIR%
+    dir %MISC_DIR%
     %NUGET_DIR%\nuget.exe install Microsoft.Internal.SPython.win32 -version %SPYTHON_VERSION% -Source %MISC_DIR%
 )
 
